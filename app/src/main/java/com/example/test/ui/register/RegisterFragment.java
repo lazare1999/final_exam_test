@@ -28,6 +28,8 @@ public class RegisterFragment extends Fragment {
     private RegisterViewModel registerViewModel;
     private FragmentRegisterBinding binding;
 
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         registerViewModel =
@@ -48,6 +50,11 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
+            if (!email.matches(emailPattern)) {
+                Toast.makeText(getContext(),"Invalid email address",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             FirebaseAuth
                     .getInstance()
                     .createUserWithEmailAndPassword(email, password)
@@ -55,6 +62,8 @@ public class RegisterFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(getActivity(), ProfileActivity.class);
                             startActivity(intent);
+                        } else {
+                            Toast.makeText(getContext(),"ERROR!",Toast.LENGTH_SHORT).show();
                         }
                     });
 

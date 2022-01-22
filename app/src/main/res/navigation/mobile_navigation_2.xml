@@ -14,14 +14,14 @@
     <fragment
         android:id="@+id/navigation_book"
         android:name="com.example.test.ui.book.BookFragment"
-        android:label="@string/title_dashboard"
+        android:label="books"
         tools:layout="@layout/fragment_login" />
 
 
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.test.ui.account.AccountFragment"
-        android:label="@string/title_dashboard"
+        android:label="account"
         tools:layout="@layout/fragment_login" />
 
 </navigation>

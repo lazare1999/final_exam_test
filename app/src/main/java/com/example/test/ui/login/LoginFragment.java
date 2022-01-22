@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,8 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
     private FragmentLoginBinding binding;
+
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,15 +44,22 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
+            if (!email.matches(emailPattern)) {
+                Toast.makeText(getContext(),"Invalid email address",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             FirebaseAuth
-                    .getInstance()
-                    .signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+                .getInstance()
+                .signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(),"ERROR!",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         });
 

@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +16,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.test.R;
+import com.example.test.books.BookDbHelper;
+import com.example.test.books.BookModel;
 import com.example.test.databinding.FragmentHomeBinding;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -28,13 +35,25 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
+        Button buttonAdd = binding.buttonAdd;
+
+        buttonAdd.setOnClickListener(view -> {
+
+            BookDbHelper bookDbHelper = new BookDbHelper(getContext());
+
+            String name = binding.editTextNameHome.getText().toString();
+            int year = Integer.parseInt(binding.editTextYearHome.getText().toString());
+
+            bookDbHelper.insert(name, year);
+
+
+            Toast.makeText(getActivity(), "წარმატებით დაემატა", Toast.LENGTH_SHORT).show();
+
+
         });
+
+
+
         return root;
     }
 
