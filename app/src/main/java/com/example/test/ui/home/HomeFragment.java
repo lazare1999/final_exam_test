@@ -39,6 +39,13 @@ public class HomeFragment extends Fragment {
 
         buttonAdd.setOnClickListener(view -> {
 
+            if (binding.editTextNameHome.getText() ==null || binding.editTextNameHome.getText().toString().isEmpty() ||
+                    binding.editTextYearHome.getText() ==null || binding.editTextYearHome.getText().toString().isEmpty()
+            ) {
+                Toast.makeText(getActivity(), "შეავსეთ გრაფები", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             BookDbHelper bookDbHelper = new BookDbHelper(getContext());
 
             String name = binding.editTextNameHome.getText().toString();
