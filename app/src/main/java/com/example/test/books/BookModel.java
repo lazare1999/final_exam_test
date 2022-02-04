@@ -52,7 +52,7 @@ public class BookModel {
     @NonNull
     @Override
     public String toString() {
-        return "Gun{" +
+        return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", year=" + year +
