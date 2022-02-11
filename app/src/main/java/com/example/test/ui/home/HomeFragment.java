@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.test.books.BookDbHelper;
+import com.example.test.todo.ToDoDbHelper;
 import com.example.test.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -27,19 +27,19 @@ public class HomeFragment extends Fragment {
 
         buttonAdd.setOnClickListener(view -> {
 
-            if (binding.editTextNameHome.getText() ==null || binding.editTextNameHome.getText().toString().isEmpty() ||
-                    binding.editTextYearHome.getText() ==null || binding.editTextYearHome.getText().toString().isEmpty()
+            if (binding.editTextTitleHome.getText() ==null || binding.editTextTitleHome.getText().toString().isEmpty() ||
+                    binding.editTextDescriptionHome.getText() ==null || binding.editTextDescriptionHome.getText().toString().isEmpty()
             ) {
                 Toast.makeText(getActivity(), "შეავსეთ გრაფები", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            BookDbHelper bookDbHelper = new BookDbHelper(getContext());
+            ToDoDbHelper bookDbHelper = new ToDoDbHelper(getContext());
 
-            String name = binding.editTextNameHome.getText().toString();
-            int year = Integer.parseInt(binding.editTextYearHome.getText().toString());
+            String title = binding.editTextTitleHome.getText().toString();
+            String description = binding.editTextDescriptionHome.getText().toString();
 
-            bookDbHelper.insert(name, year);
+            bookDbHelper.insert(title, description);
 
 
             Toast.makeText(getActivity(), "წარმატებით დაემატა", Toast.LENGTH_SHORT).show();

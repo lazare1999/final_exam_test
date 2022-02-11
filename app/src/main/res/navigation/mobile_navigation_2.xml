@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_book"
-        android:name="com.example.test.ui.book.BookFragment"
-        android:label="books"
+        android:id="@+id/navigation_todo"
+        android:name="com.example.test.ui.todo.ToDoFragment"
+        android:label="ToDo"
         tools:layout="@layout/fragment_login" />
 
 

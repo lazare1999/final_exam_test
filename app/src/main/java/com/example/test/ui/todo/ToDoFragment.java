@@ -1,4 +1,4 @@
-package com.example.test.ui.book;
+package com.example.test.ui.todo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,30 +11,30 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.test.R;
-import com.example.test.books.BookDbHelper;
-import com.example.test.books.BookModel;
-import com.example.test.databinding.FragmentBookBinding;
+import com.example.test.todo.ToDoDbHelper;
+import com.example.test.todo.ToDoModel;
+import com.example.test.databinding.FragmentTodoBinding;
 
 import java.util.List;
 
-public class BookFragment extends Fragment {
+public class ToDoFragment extends Fragment {
 
-    private FragmentBookBinding binding;
+    private FragmentTodoBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentBookBinding.inflate(inflater, container, false);
+        binding = FragmentTodoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         Button buttonSearch = binding.buttonSearch;
 
         buttonSearch.setOnClickListener(view -> {
 
-            BookDbHelper bookDbHelper = new BookDbHelper(getContext());
+            ToDoDbHelper bookDbHelper = new ToDoDbHelper(getContext());
             String name = binding.editTextName.getText().toString();
 
-            List<BookModel> select = bookDbHelper.select(name);
+            List<ToDoModel> select = bookDbHelper.select(name);
 
             String[] tutorials = new String[select.size()];
 

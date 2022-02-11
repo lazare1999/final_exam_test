@@ -16,6 +16,8 @@ import com.example.test.ProfileActivity;
 import com.example.test.databinding.FragmentRegisterBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
@@ -35,8 +37,17 @@ public class RegisterFragment extends Fragment {
 
             String email = binding.editTextEmail.getText().toString();
             String password = binding.editTextPassword.getText().toString();
+            String password2 = binding.editTextPassword2.getText().toString();
 
-            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            if (TextUtils.isEmpty(email) ||
+                    TextUtils.isEmpty(password) ||
+                    TextUtils.isEmpty(password2)
+            ) {
+                return;
+            }
+
+            if (!Objects.equals(password, password2)) {
+                Toast.makeText(getContext(),"passwords aren't same",Toast.LENGTH_SHORT).show();
                 return;
             }
 
